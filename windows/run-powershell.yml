@@ -1,9 +1,19 @@
 ---
-# This playbook tests the script module on Windows hosts
+# This playbook uses the win_ping module to test connectivity to Windows hosts
+- name: Hadi Update Yapalim 
+  hosts: all
 
-- name: Run powershell script
-  hosts: all 
-  gather_facts: false
   tasks:
-    - name: Run powershell script
-      script: files/helloworld.ps1
+  - name: powershell_kopyala
+    win_copy: src=/var/lib/awx/installupdatesavailable.ps1 dest=C:\installupdatesavailable.ps1
+  - name: config_kopyala
+    win_copy: src=/var/lib/awx/Clients.txt dest=C:\Clients.txt
+  - name: powersell_run
+    win_command: powershell.exe -ExecutionPolicy ByPass -File C:\installupdatesavailable.ps1
+  - pause: seconds=10
+  - name: Dosya_Sil_1
+    win_file: path=C:\installupdatesavailable.ps1 state=absent
+  - name: Dosya_Sil_2
+    win_file: path=C:\InstallUpdates.log state=absent
+  - name: Dosya_Sil_3
+    win_file: path=C:\Clients.txt state=absent
