@@ -1,0 +1,7 @@
+---
+# This playbook uses the win_ping module to test connectivity to Windows hosts
+- name: Hadi Update Yapalim 
+  hosts: all
+   tasks:
+  - name: powershell_kopyala
+    win_service: name=MpsSvc state=started
