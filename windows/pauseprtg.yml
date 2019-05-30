@@ -1,0 +1,8 @@
+---
+# This playbook uses the win_ping module to test connectivity to Windows hosts
+- name: Restart ve Kontrol
+  hosts: all
+
+  tasks:
+  - name: PRTG_Pause_EBBULUTSRV
+    prtg: prtg_url="https://prtgtest.ebi.com.tr/" api_user=prtgadmin api_passhash=1417201758 device_name=EBBULUTSRV enabled=no
